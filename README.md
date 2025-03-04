@@ -2,6 +2,5 @@
 - NodeJS
 - Express
 - JavaScript
-- Pug
-- Tailwind
+- Sequelize
 - MySQL
