@@ -1,7 +1,7 @@
 import express from "express";
 
 import { sequelize, connectDB } from "./config/db.js";
-import { User } from "./models/UserModel.js";
+import { User, UserRol } from "./models/index.js";
 
 // Create Server App With Express
 const app = express();
