@@ -1,3 +1,4 @@
+import { PropertyState } from "./PropertyStateModel.js";
 import { User } from "./UserModel.js";
 import { UserRol } from "./UserRolModel.js";
 
