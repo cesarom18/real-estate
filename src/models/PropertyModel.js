@@ -44,7 +44,7 @@ export const Property = sequelize.define("Property",
         }
     },
     {
-        tableName: "Properties",
+        tableName: "properties",
         timestamps: true
     }
 );

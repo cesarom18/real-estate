@@ -11,7 +11,7 @@ export const UserRol = sequelize.define("UserRol",
         }
     },
     {
-        tableName: "UserRoles",
+        tableName: "user_roles",
         timestamps: false,
     }
 );

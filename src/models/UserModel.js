@@ -23,7 +23,7 @@ export const User = sequelize.define("User",
         }
     },
     {
-        tableName: "Users",
+        tableName: "users",
         timestamps: false,
     }
 );
