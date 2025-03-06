@@ -32,6 +32,7 @@ export const PropertyTransaction = sequelize.define("PropertyTransaction",
     },
     {
         tableName: "property_transactions",
-        timestamps: false
+        timestamps: false,
+        underscored: true
     }
 );

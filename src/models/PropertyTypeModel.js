@@ -16,6 +16,7 @@ export const PropertyType = sequelize.define("PropertyType",
     },
     {
         tableName: "property_types",
-        timestamps: false
+        timestamps: false,
+        underscored: true
     }
 );
