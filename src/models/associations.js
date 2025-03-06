@@ -2,6 +2,7 @@ import { PropertyType } from "./PropertyTypeModel.js";
 import { Property } from "./PropertyModel.js";
 import { User } from "./UserModel.js";
 import { UserRol } from "./UserRolModel.js";
+import { PropertyTransaction } from "./PropertyTransactionModel.js";
 
 export const setupAssociations = () => {
     User.belongsTo(UserRol, {
