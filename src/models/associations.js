@@ -10,6 +10,11 @@ export const setupAssociations = () => {
         }
     });
 
+    Property.belongsTo(User, {
+        foreignKey: {
+            name: "userId"
+        }
+    });
     Property.belongsTo(PropertyType, {
         foreignKey: {
             name: "propertyTypeId"
