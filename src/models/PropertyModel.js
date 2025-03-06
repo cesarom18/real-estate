@@ -34,10 +34,6 @@ export const Property = sequelize.define("Property",
             type: DataTypes.FLOAT,
             allowNull: false
         },
-        propertyStateId: {
-            type: DataTypes.INTEGER,
-            allowNull: false
-        },
         propertyTypeId: {
             type: DataTypes.INTEGER,
             allowNull: false

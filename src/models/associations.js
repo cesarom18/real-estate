@@ -1,4 +1,3 @@
-import { PropertyState } from "./PropertyStateModel.js";
 import { PropertyType } from "./PropertyTypeModel.js";
 import { Property } from "./PropertyModel.js";
 import { User } from "./UserModel.js";
@@ -11,11 +10,6 @@ export const setupAssociations = () => {
         }
     });
 
-    Property.belongsTo(PropertyState, {
-        foreignKey: {
-            name: "propertyStateId"
-        }
-    });
     Property.belongsTo(PropertyType, {
         foreignKey: {
             name: "propertyTypeId"
