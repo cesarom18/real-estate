@@ -21,4 +21,15 @@ export const setupAssociations = () => {
             name: "propertyTypeId"
         }
     });
+
+    PropertyTransaction.belongsTo(Property, {
+        foreignKey: {
+            name: "propertyId"
+        }
+    });
+    PropertyTransaction.belongsTo(User, {
+        foreignKey: {
+            name: "userId"
+        }
+    })
 }
