@@ -6,6 +6,7 @@ export const PropertyType = sequelize.define("PropertyType",
     {
         name: {
             type: DataTypes.STRING,
+            unique: true,
             validate: {
                 isIn: [[
                     "House", "Apartment", "Condo",

@@ -7,6 +7,7 @@ export const UserRol = sequelize.define("UserRol",
         name: {
             type: DataTypes.ENUM("admin", "client", "agent"),
             allowNull: false,
+            unique: true,
             defaultValue: "client"
         }
     },
