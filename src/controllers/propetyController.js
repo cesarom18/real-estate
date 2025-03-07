@@ -26,3 +26,24 @@ export const createProperty = async (req, res) => {
         });
     }
 }
+
+// TODO Fix Bug When Trying To Delete A Property That Doesn't Exist
+export const deleteProperty = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        await Property.destroy({
+            where: {
+                id
+            }
+        });
+        res.status(201).json({
+            msg: "Property deleted successfully"
+        });
+    } catch (error) {
+        console.log(`[INFO-SV]: Error Deleting Property\n ${error}`);
+        res.status(500).json({
+            msg: "Error deleting property"
+        });
+    }
+}

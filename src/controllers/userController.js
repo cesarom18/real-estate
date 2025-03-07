@@ -35,6 +35,7 @@ export const createUser = async (req, res) => {
     }
 }
 
+// TODO Fix Bug When Trying To Delete A User That Doesn't Exist
 export const deleteUser = async (req, res) => {
     try {
         const { id } = req.params;
