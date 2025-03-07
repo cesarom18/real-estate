@@ -13,6 +13,7 @@ export const getUsers = async (req, res) => {
     }
 }
 
+// TODO Fix Bug When Creating Invalid User (Skip ID's), Probably DB Reason Or Validations
 export const createUser = async (req, res) => {
     try {
         const { name, email, password, userRol } = req.body;
@@ -23,7 +24,7 @@ export const createUser = async (req, res) => {
             password,
             userRolId: userRol
         });
-        res.status(200).json({
+        res.status(201).json({
             msg: "User created successfully"
         });
     } catch (error) {
@@ -33,3 +34,23 @@ export const createUser = async (req, res) => {
         });
     }
 }
+
+export const deleteUser = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        await User.destroy({
+            where: {
+                id
+            }
+        })
+        res.status(200).json({
+            msg: "User deleted successfully"
+        });
+    } catch (error) {
+        console.log(`[INFO-SV]: Error Deleting User\n ${error}`);
+        res.status(500).json({
+            msg: "Error deleting user"
+        });
+    }
+};
