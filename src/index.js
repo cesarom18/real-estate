@@ -4,7 +4,8 @@ import { sequelize, connectDB } from "./config/db.js";
 import { setupAssociations } from "./models/associations.js";
 import {
     userRoutes,
-    propertyRoutes
+    propertyRoutes,
+    propertyTransactionRoutes
 } from "./routes/index.js";
 
 // Create Server App With Express
@@ -24,6 +25,7 @@ setupAssociations();
 // Setup Routes
 app.use("/api/user", userRoutes);
 app.use("/api/property", propertyRoutes);
+app.use("/api/property-transaction", propertyTransactionRoutes);
 
 // Server Port Listener
 const port = process.env.PORT || 3000;
