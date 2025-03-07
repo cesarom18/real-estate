@@ -7,9 +7,13 @@ import { userRoutes } from "./routes/index.js";
 // Create Server App With Express
 const app = express();
 
+// Global Middlewares
+app.use(express.json()); // Accept JSON Body Request
+app.use(express.urlencoded({ extended: true })); // Accept Form Data
+
 // DB Setup And Configuration
 connectDB();
-sequelize.sync({ force: true, alter: true }) // TODO: Change 'force' Property To False When DB Model Get Finished
+sequelize.sync({ force: false, alter: true })
     .then(() => console.log("[INFO-DB] Synchronized DB and tables"))
     .catch((error) => console.log(`[INFO-DB] Error Synchronizing DB And Tables\n ${error}`));
 setupAssociations();
