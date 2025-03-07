@@ -27,6 +27,30 @@ export const createProperty = async (req, res) => {
     }
 }
 
+// TODO Fix Bug When Trying To Update A Property That Doesn't Exist
+export const updateProperty = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        console.log(id)
+        console.log(req.body)
+
+        await Property.update(req.body, {
+            where: {
+                id
+            }
+        });
+        res.status(201).json({
+            msg: "Property updated successfully"
+        });
+    } catch (error) {
+        console.log(`[INFO-SV]: Error Updating Property\n ${error}`);
+        res.status(500).json({
+            msg: "Error updating property"
+        });
+    }
+}
+
 // TODO Fix Bug When Trying To Delete A Property That Doesn't Exist
 export const deleteProperty = async (req, res) => {
     try {
