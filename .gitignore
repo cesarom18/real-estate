@@ -3,3 +3,6 @@ node_modules
 
 # Enviroment Variables
 .env
+
+# Http Test Request
+test-api.http
