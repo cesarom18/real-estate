@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: true })); // Accept Form Data
 
 // DB Setup And Configuration
 connectDB();
-sequelize.sync({ force: false, alter: true })
+sequelize.sync({ force: false, alter: false })
     .then(() => console.log("[INFO-DB]: Synchronized DB and tables"))
     .catch((error) => console.log(`[INFO-DB]: Error Synchronizing DB And Tables\n ${error}`));
 setupAssociations();
