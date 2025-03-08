@@ -26,14 +26,7 @@ export const createUser = async (req, res) => {
             });
         }
 
-        const { name, email, password, userRolId } = req.body;
-
-        /* await User.create({
-            name,
-            email,
-            password,
-            userRolId: userRol
-        }); */
+        await User.create(req.body);
         res.status(201).json({
             msg: "User created successfully"
         });
@@ -48,6 +41,14 @@ export const createUser = async (req, res) => {
 // TODO Fix Bug When Trying To Delete A User That Doesn't Exist
 export const deleteUser = async (req, res) => {
     try {
+        const { errors } = validationResult(req);
+        // Check If Request Have Some Error
+        if (errors.length != 0) {
+            return res.status(400).json({
+                msg: errors[0].msg
+            });
+        }
+
         const { id } = req.params;
 
         await User.destroy({

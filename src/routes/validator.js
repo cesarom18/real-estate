@@ -1,4 +1,4 @@
-import { body } from "express-validator";
+import { body, param } from "express-validator";
 
 export const createUserRules = () => {
     return [
@@ -15,5 +15,12 @@ export const createUserRules = () => {
         body("userRolId")
             .exists().withMessage("userRolId key must be in the request")
             .isNumeric().withMessage("userRolId must be a number")
+    ];
+}
+
+export const deleteUserRules = () => {
+    return [
+        param("id")
+            .isInt().withMessage("User id param must be a number")
     ];
 }
