@@ -1,4 +1,4 @@
-import { body, param } from "express-validator";
+import { body, param, check } from "express-validator";
 
 export const createUserRules = () => {
     return [
@@ -63,5 +63,45 @@ export const deletePropertyRules = () => {
     return [
         param("id")
             .isInt({ min: 0 }).withMessage("property id param must be a intenger and greater or equal to 0")
+    ];
+}
+
+export const updatePropertyRules = () => {
+    return [
+        param("id")
+            .isInt({ min: 0 }).withMessage("property id param must be a intenger and greater or equal to 0"),
+        check().custom((value, { req }) => { // Ensure At Least One Field
+            if (Object.keys(req.body).length === 0) {
+                throw new Error('there must be at least 1 field to update a property');
+            }
+            return true;
+        }),
+        body("title")
+            .optional({ nullable: true })
+            .isString().withMessage("title must be a string")
+            .isLength({ min: 5, max: 25 }).withMessage("title must be between 6 and 15 characters long"),
+        body("description")
+            .optional({ nullable: true })
+            .isString().withMessage("descripton must be a string")
+            .isLength({ min: 10, max: 100 }).withMessage("title must be between 10 and 100 characters long"),
+        body("price")
+            .optional({ nullable: true })
+            .isInt({ min: 100 }).withMessage("price must be a number and greater than 100"),
+        body("location")
+            .optional({ nullable: true })
+            .isString().withMessage("location must be a string")
+            .isLength({ min: 10 }).withMessage("location must be greater than 10 characters"),
+        body("numRooms")
+            .optional({ nullable: true })
+            .isInt({ min: 1 }).withMessage("numRooms must be a integer and greater than 1"),
+        body("numBaths")
+            .optional({ nullable: true })
+            .isInt({ min: 0 }).withMessage("numBaths must be a integer and greater than 0"),
+        body("mt2")
+            .optional({ nullable: true })
+            .isFloat({ min: 10.0 }).withMessage("mt2 must be a float and greater than 10.0"),
+        body("propertyTypeId")
+            .optional({ nullable: true })
+            .isInt({ min: 0 }).withMessage("propertyTypeId must be a integer and greater or equal to 0"),
     ];
 }

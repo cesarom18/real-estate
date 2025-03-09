@@ -41,8 +41,15 @@ export const createProperty = async (req, res) => {
 // TODO Fix Bug When Trying To Update A Property That Doesn't Exist
 export const updateProperty = async (req, res) => {
     try {
-        const { id } = req.params;
+        const { errors } = validationResult(req);
+        // Check If Request Have Some Error
+        if (errors.length != 0) {
+            return res.status(400).json({
+                msg: errors[0].msg
+            });
+        }
 
+        const { id } = req.params;
         await Property.update(req.body, {
             where: {
                 id
@@ -72,7 +79,6 @@ export const deleteProperty = async (req, res) => {
         }
 
         const { id } = req.params;
-
         await Property.destroy({
             where: {
                 id

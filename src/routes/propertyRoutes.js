@@ -5,10 +5,11 @@ import {
     createProperty,
     updateProperty,
     deleteProperty
-} from "../controllers/propetyController.js";
+} from "../controllers/propertyController.js";
 import {
     createPropertyRules,
-    deletePropertyRules
+    deletePropertyRules,
+    updatePropertyRules
 } from "./validator.js";
 
 export const propertyRoutes = Router();
@@ -16,4 +17,4 @@ export const propertyRoutes = Router();
 propertyRoutes.get("/", getProperties);
 propertyRoutes.post("/", createPropertyRules(), createProperty);
 propertyRoutes.delete("/:id", deletePropertyRules(), deleteProperty);
-propertyRoutes.put("/:id", updateProperty)
+propertyRoutes.put("/:id", updatePropertyRules(), updateProperty);
