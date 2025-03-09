@@ -21,7 +21,7 @@ export const createUserRules = () => {
 export const deleteUserRules = () => {
     return [
         param("id")
-            .isInt({ min: 0 }).withMessage("User id param must be a intenger and greater or equal to 0")
+            .isInt({ min: 0 }).withMessage("user id param must be a intenger and greater or equal to 0")
     ];
 }
 
@@ -56,5 +56,12 @@ export const createPropertyRules = () => {
         body("propertyTypeId")
             .exists().withMessage("propertyTypeId key must be in the request")
             .isInt({ min: 0 }).withMessage("propertyTypeId must be a integer and greater or equal to 0"),
+    ];
+}
+
+export const deletePropertyRules = () => {
+    return [
+        param("id")
+            .isInt({ min: 0 }).withMessage("property id param must be a intenger and greater or equal to 0")
     ];
 }
