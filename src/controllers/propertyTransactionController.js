@@ -8,7 +8,7 @@ export const getPropertyTransactions = async (req, res) => {
     } catch (error) {
         console.log(`[INFO-SV]: Error Getting Property Transactions\n ${error}`);
         res.status(500).json({
-            msg: "Error getting property transactions"
+            msg: "error getting property transactions"
         });
     }
 }

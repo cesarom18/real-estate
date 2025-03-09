@@ -5,11 +5,12 @@ import { User } from "../models/UserModel.js";
 export const getUsers = async (req, res) => {
     try {
         const users = await User.findAll();
+        console.log("[INFO-SV]: Success Getting Users");
         res.status(200).json(users);
     } catch (error) {
         console.log(`[INFO-SV]: Error Getting Users\n ${error}`);
         res.status(500).json({
-            msg: "Error getting users"
+            msg: "error getting users"
         });
     }
 }
@@ -26,13 +27,14 @@ export const createUser = async (req, res) => {
         }
 
         await User.create(req.body);
+        console.log("[INFO-SV]: Success Creating User");
         res.status(201).json({
-            msg: "User created successfully"
+            msg: "user created successfully"
         });
     } catch (error) {
         console.log(`[INFO-SV]: Error Creating User\n ${error}`);
         res.status(500).json({
-            msg: "Error creating user"
+            msg: "error creating user"
         });
     }
 }
@@ -54,14 +56,15 @@ export const deleteUser = async (req, res) => {
             where: {
                 id
             }
-        })
+        });
+        console.log("[INFO-SV]: Success Deleting User");
         res.status(200).json({
-            msg: "User deleted successfully"
+            msg: "user deleted successfully"
         });
     } catch (error) {
         console.log(`[INFO-SV]: Error Deleting User\n ${error}`);
         res.status(500).json({
-            msg: "Error deleting user"
+            msg: "error deleting user"
         });
     }
 };

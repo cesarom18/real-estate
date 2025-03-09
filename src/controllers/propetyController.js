@@ -5,6 +5,7 @@ import { Property } from "../models/PropertyModel.js";
 export const getProperties = async (req, res) => {
     try {
         const properties = await Property.findAll();
+        console.log("[INFO-SV]: Success Getting Properties");
         res.status(200).json(properties);
     } catch (error) {
         console.log(`[INFO-SV]: Error Getting Properties\n ${error}`);
@@ -25,13 +26,14 @@ export const createProperty = async (req, res) => {
         }
 
         await Property.create(req.body);
+        console.log("[INFO-SV]: Success Creation Property");
         res.status(201).json({
-            msg: "Property created successfully"
+            msg: "property created successfully"
         });
     } catch (error) {
         console.log(`[INFO-SV]: Error Creating Property\n ${error}`);
         res.status(500).json({
-            msg: "Error creating property"
+            msg: "error creating property"
         });
     }
 }
@@ -41,21 +43,19 @@ export const updateProperty = async (req, res) => {
     try {
         const { id } = req.params;
 
-        console.log(id)
-        console.log(req.body)
-
         await Property.update(req.body, {
             where: {
                 id
             }
         });
+        console.log("[INFO-SV]: Success Updating Property");
         res.status(201).json({
-            msg: "Property updated successfully"
+            msg: "property updated successfully"
         });
     } catch (error) {
         console.log(`[INFO-SV]: Error Updating Property\n ${error}`);
         res.status(500).json({
-            msg: "Error updating property"
+            msg: "error updating property"
         });
     }
 }
@@ -78,13 +78,14 @@ export const deleteProperty = async (req, res) => {
                 id
             }
         });
+        console.log("[INFO-SV]: Success Deleting Property");
         res.status(201).json({
-            msg: "Property deleted successfully"
+            msg: "property deleted successfully"
         });
     } catch (error) {
         console.log(`[INFO-SV]: Error Deleting Property\n ${error}`);
         res.status(500).json({
-            msg: "Error deleting property"
+            msg: "error deleting property"
         });
     }
 }
