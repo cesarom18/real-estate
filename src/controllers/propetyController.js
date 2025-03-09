@@ -1,9 +1,10 @@
+import { validationResult } from "express-validator";
+
 import { Property } from "../models/PropertyModel.js";
 
 export const getProperties = async (req, res) => {
     try {
         const properties = await Property.findAll();
-        console.log("[INFO-SV]: Success Getting Properties");
         res.status(200).json(properties);
     } catch (error) {
         console.log(`[INFO-SV]: Error Getting Properties\n ${error}`);
@@ -15,6 +16,14 @@ export const getProperties = async (req, res) => {
 
 export const createProperty = async (req, res) => {
     try {
+        const { errors } = validationResult(req);
+        // Check If Request Have Some Error
+        if (errors.length != 0) {
+            return res.status(400).json({
+                msg: errors[0].msg
+            });
+        }
+
         await Property.create(req.body);
         res.status(201).json({
             msg: "Property created successfully"
