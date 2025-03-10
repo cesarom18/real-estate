@@ -48,6 +48,7 @@ export const deleteUser = async (req, res) => {
                 msg: errors[0].msg
             });
         }
+
         const { id } = req.params;
         // Check If User Exist
         const user = await User.findByPk(id);
