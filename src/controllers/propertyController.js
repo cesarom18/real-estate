@@ -1,5 +1,3 @@
-import { validationResult } from "express-validator";
-
 import { Property } from "../models/PropertyModel.js";
 
 export const getProperties = async (req, res) => {
@@ -17,14 +15,6 @@ export const getProperties = async (req, res) => {
 
 export const createProperty = async (req, res) => {
     try {
-        const { errors } = validationResult(req);
-        // Check If Request Have Some Error
-        if (errors.length != 0) {
-            return res.status(400).json({
-                msg: errors[0].msg
-            });
-        }
-
         await Property.create(req.body);
         console.log("[INFO-SV]: Success Creation Property");
         res.status(201).json({
@@ -40,14 +30,6 @@ export const createProperty = async (req, res) => {
 
 export const updateProperty = async (req, res) => {
     try {
-        const { errors } = validationResult(req);
-        // Check If Request Have Some Error
-        if (errors.length != 0) {
-            return res.status(400).json({
-                msg: errors[0].msg
-            });
-        }
-
         const { id } = req.params;
         await Property.update(req.body, {
             where: {
@@ -68,14 +50,6 @@ export const updateProperty = async (req, res) => {
 
 export const deleteProperty = async (req, res) => {
     try {
-        const { errors } = validationResult(req);
-        // Check If Request Have Some Error
-        if (errors.length != 0) {
-            return res.status(400).json({
-                msg: errors[0].msg
-            });
-        }
-
         const { id } = req.params;
         await Property.destroy({
             where: {

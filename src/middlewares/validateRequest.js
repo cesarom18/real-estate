@@ -1,4 +1,20 @@
-import { body, param, check } from "express-validator";
+import {
+    body,
+    param,
+    check,
+    validationResult
+} from "express-validator";
+
+// Check If Request Have Some Error
+export const validateRequest = (req, res, next) => {
+    const { errors } = validationResult(req);
+    if (errors.length != 0) {
+        return res.status(400).json({
+            msg: errors[0].msg
+        });
+    }
+    next();
+}
 
 export const createUserRules = () => {
     return [
@@ -67,6 +83,7 @@ export const deletePropertyRules = () => {
 }
 
 export const updatePropertyRules = () => {
+    console.log("entro validate update property")
     return [
         param("id")
             .isInt({ min: 0 }).withMessage("property id param must be a intenger and greater or equal to 0"),

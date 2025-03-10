@@ -1,5 +1,3 @@
-import { validationResult } from "express-validator";
-
 import { User } from "../models/UserModel.js";
 
 export const getUsers = async (req, res) => {
@@ -18,14 +16,6 @@ export const getUsers = async (req, res) => {
 // TODO Fix Bug When Creating Invalid User (Skip ID's), Probably DB Reason Or Validations
 export const createUser = async (req, res) => {
     try {
-        const { errors } = validationResult(req);
-        // Check If Request Have Some Error
-        if (errors.length != 0) {
-            return res.status(400).json({
-                msg: errors[0].msg
-            });
-        }
-
         await User.create(req.body);
         console.log("[INFO-SV]: Success Creating User");
         res.status(201).json({
@@ -41,14 +31,6 @@ export const createUser = async (req, res) => {
 
 export const deleteUser = async (req, res) => {
     try {
-        const { errors } = validationResult(req);
-        // Check If Request Have Some Error
-        if (errors.length != 0) {
-            return res.status(400).json({
-                msg: errors[0].msg
-            });
-        }
-
         const { id } = req.params;
         await User.destroy({
             where: {

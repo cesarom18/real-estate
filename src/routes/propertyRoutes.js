@@ -7,6 +7,7 @@ import {
     deleteProperty
 } from "../controllers/propertyController.js";
 import {
+    validateRequest,
     createPropertyRules,
     deletePropertyRules,
     updatePropertyRules
@@ -16,6 +17,6 @@ import { checkProperty } from "../middlewares/entityExists.js";
 export const propertyRoutes = Router();
 
 propertyRoutes.get("/", getProperties);
-propertyRoutes.post("/", createPropertyRules(), createProperty);
-propertyRoutes.delete("/:id", deletePropertyRules(), checkProperty, deleteProperty);
-propertyRoutes.put("/:id", updatePropertyRules(), checkProperty, updateProperty);
+propertyRoutes.post("/", createPropertyRules(), validateRequest, createProperty);
+propertyRoutes.delete("/:id", deletePropertyRules(), validateRequest, checkProperty, deleteProperty);
+propertyRoutes.put("/:id", updatePropertyRules(), validateRequest, checkProperty, updateProperty);
