@@ -38,7 +38,6 @@ export const createProperty = async (req, res) => {
     }
 }
 
-// TODO Fix Bug When Trying To Update A Property That Doesn't Exist
 export const updateProperty = async (req, res) => {
     try {
         const { errors } = validationResult(req);
@@ -50,6 +49,14 @@ export const updateProperty = async (req, res) => {
         }
 
         const { id } = req.params;
+        // Check If Property Exist
+        const property = await Property.findByPk(id);
+        if (property === null) {
+            return res.status(404).json({
+                msg: "property not registered in the database"
+            });
+        }
+
         await Property.update(req.body, {
             where: {
                 id
