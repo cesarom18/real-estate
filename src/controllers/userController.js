@@ -50,14 +50,6 @@ export const deleteUser = async (req, res) => {
         }
 
         const { id } = req.params;
-        // Check If User Exist
-        const user = await User.findByPk(id);
-        if (user === null) {
-            return res.status(404).json({
-                msg: "user not registered in the database"
-            });
-        }
-
         await User.destroy({
             where: {
                 id

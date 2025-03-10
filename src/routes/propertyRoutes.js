@@ -10,7 +10,7 @@ import {
     createPropertyRules,
     deletePropertyRules,
     updatePropertyRules
-} from "../middlewares/validator.js";
+} from "../middlewares/validateRequest.js";
 
 export const propertyRoutes = Router();
 
