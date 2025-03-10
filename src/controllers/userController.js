@@ -39,7 +39,6 @@ export const createUser = async (req, res) => {
     }
 }
 
-// TODO Fix Bug When Trying To Delete A User That Doesn't Exist
 export const deleteUser = async (req, res) => {
     try {
         const { errors } = validationResult(req);
@@ -49,8 +48,15 @@ export const deleteUser = async (req, res) => {
                 msg: errors[0].msg
             });
         }
-
         const { id } = req.params;
+        // Check If User Exist
+        const user = await User.findByPk(id);
+        if (user === null) {
+            return res.status(404).json({
+                msg: "user not registered in the database"
+            });
+        }
+
         await User.destroy({
             where: {
                 id
