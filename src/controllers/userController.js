@@ -1,3 +1,5 @@
+import { ValidationError } from "sequelize";
+
 import { User } from "../models/UserModel.js";
 
 export const getUsers = async (req, res) => {
@@ -16,13 +18,21 @@ export const getUsers = async (req, res) => {
 // TODO Fix Bug When Creating Invalid User (Skip ID's), Probably DB Reason Or Validations
 export const createUser = async (req, res) => {
     try {
-        await User.create(req.body);
+        const user = await User.create(req.body);
+        console.log("asd")
+        console.log(user);
         console.log("[INFO-SV]: Success Creating User");
         res.status(201).json({
             msg: "user created successfully"
         });
     } catch (error) {
         console.log(`[INFO-SV]: Error Creating User\n ${error}`);
+        // If Is A Validation/Constraint DB Error 
+        if (error instanceof ValidationError) {
+            return res.status(400).json({
+                msg: error.errors[0].message
+            });
+        }
         res.status(500).json({
             msg: "error creating user"
         });

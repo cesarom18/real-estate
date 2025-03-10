@@ -1,3 +1,5 @@
+import { ValidationError } from "sequelize";
+
 import { Property } from "../models/PropertyModel.js";
 
 export const getProperties = async (req, res) => {
@@ -42,6 +44,12 @@ export const updateProperty = async (req, res) => {
         });
     } catch (error) {
         console.log(`[INFO-SV]: Error Updating Property\n ${error}`);
+        // If Is A Validation/Constraint DB Error 
+        if (error instanceof ValidationError) {
+            return res.status(400).json({
+                msg: error.errors[0].message
+            });
+        }
         res.status(500).json({
             msg: "error updating property"
         });
