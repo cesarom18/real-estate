@@ -15,7 +15,19 @@ export const getUsers = async (req, res) => {
     }
 }
 
-// TODO Fix Bug When Creating Invalid User (Skip ID's), Probably DB Reason Or Validations
+export const getUserById = async (req, res) => {
+    try {
+        const user = await User.findByPk(req.params.id);
+        console.log("[INFO-SV]: Success Getting User");
+        res.status(200).json(user);
+    } catch (error) {
+        console.log(`[INFO-SV]: Error Getting User\n ${error}`);
+        res.status(500).json({
+            msg: "error getting user"
+        });
+    }
+}
+
 export const createUser = async (req, res) => {
     try {
         const user = await User.create(req.body);

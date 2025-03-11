@@ -34,6 +34,13 @@ export const createUserRules = () => {
     ];
 }
 
+export const getUserRules = () => {
+    return [
+        param("id")
+            .isInt({ min: 0 }).withMessage("user id param must be a intenger and greater or equal to 0")
+    ];
+}
+
 export const deleteUserRules = () => {
     return [
         param("id")
