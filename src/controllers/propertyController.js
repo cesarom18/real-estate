@@ -15,6 +15,19 @@ export const getProperties = async (req, res) => {
     }
 }
 
+export const getPropertyById = async (req, res) => {
+    try {
+        const property = await Property.findByPk(req.params.id);
+        console.log("[INFO-SV]: Success Getting Property");
+        res.status(200).json(property);
+    } catch (error) {
+        console.log(`[INFO-SV]: Error Getting Property\n ${error}`);
+        res.status(500).json({
+            msg: "error getting property"
+        });
+    }
+}
+
 export const createProperty = async (req, res) => {
     try {
         await Property.create(req.body);

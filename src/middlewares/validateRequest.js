@@ -82,6 +82,13 @@ export const createPropertyRules = () => {
     ];
 }
 
+export const getPropertyRules = () => {
+    return [
+        param("id")
+            .isInt({ min: 0 }).withMessage("property id param must be a intenger and greater or equal to 0")
+    ];
+}
+
 export const deletePropertyRules = () => {
     return [
         param("id")
