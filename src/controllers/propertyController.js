@@ -4,7 +4,11 @@ import { Property } from "../models/PropertyModel.js";
 
 export const getProperties = async (req, res) => {
     try {
-        const properties = await Property.findAll();
+        const { page } = req.query;
+        const properties = await Property.findAll({
+            offset: (page - 1) * 5,
+            limit: page * 5
+        });
         console.log("[INFO-SV]: Success Getting Properties");
         res.status(200).json(properties);
     } catch (error) {

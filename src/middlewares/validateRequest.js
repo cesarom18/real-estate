@@ -1,6 +1,7 @@
 import {
     body,
     param,
+    query,
     check,
     validationResult
 } from "express-validator";
@@ -79,6 +80,15 @@ export const createPropertyRules = () => {
         body("propertyTypeId")
             .exists().withMessage("propertyTypeId key must be in the request")
             .isInt({ min: 0 }).withMessage("propertyTypeId must be a integer and greater or equal to 0"),
+    ];
+}
+
+export const getPropertiesRules = () => {
+    return [
+        query("page")
+            .exists().withMessage("page query must be in the URL")
+            .isInt({ min: 1 }).withMessage("page query must be a integer greater or equal to 1")
+            .toInt()
     ];
 }
 

@@ -10,6 +10,7 @@ import {
 import {
     validateRequest,
     createPropertyRules,
+    getPropertiesRules,
     getPropertyRules,
     deletePropertyRules,
     updatePropertyRules
@@ -18,7 +19,7 @@ import { checkProperty } from "../middlewares/entityExists.js";
 
 export const propertyRoutes = Router();
 
-propertyRoutes.get("/", getProperties);
+propertyRoutes.get("/", getPropertiesRules(), validateRequest, getProperties);
 propertyRoutes.get("/:id", getPropertyRules(), validateRequest, checkProperty, getPropertyById);
 propertyRoutes.post("/", createPropertyRules(), validateRequest, createProperty);
 propertyRoutes.delete("/:id", deletePropertyRules(), validateRequest, checkProperty, deleteProperty);
