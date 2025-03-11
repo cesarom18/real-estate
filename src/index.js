@@ -1,4 +1,5 @@
 import express from "express";
+import rateLimiter from "express-rate-limit";
 
 import { sequelize, connectDB } from "./config/db.js";
 import { setupAssociations } from "./models/associations.js";
@@ -14,6 +15,19 @@ const app = express();
 // Global Middlewares
 app.use(express.json()); // Accept JSON Body Request
 app.use(express.urlencoded({ extended: true })); // Accept Form Data
+app.use(rateLimiter({ // Request Limiter
+    windowMs: 15 * 60 * 1000, // 15 Min Of Restriction
+    max: 100, // Max 100 Request Per IP
+    headers: true, // Enable Header Limiter Feedback
+    standardHeaders: true,
+    legacyHeaders: false,
+    handler: (req, res, next) => {
+        res.status(429).json({
+            error: "too many request from this IP, try later", // Error Message
+        });
+    },
+    keyGenerator: (req, res) => req.ip, // Identify Users For His IP
+}));
 
 // DB Setup And Configuration
 connectDB();
