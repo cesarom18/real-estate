@@ -146,3 +146,20 @@ export const updatePropertyRules = () => {
             .isInt({ min: 0 }).withMessage("propertyTypeId must be a integer and greater or equal to 0"),
     ];
 }
+
+export const createPropertyTransactionRules = () => {
+    return [
+        body("price")
+            .exists().withMessage("price key must be in the request")
+            .isInt({ min: 100 }).withMessage("price must be a number and greater than 100"),
+        body("paymentMethod")
+            .exists().withMessage("paymentMethod key must be in the request")
+            .isIn(["Credit Card", "Debit Card", "Bank Transfer"]).withMessage("paymentMethod must be one of these values 'Credit Card', 'Debit Card', 'Bank Transfer'"),
+        body("userId")
+            .exists().withMessage("userId key must be in the request")
+            .isInt({ min: 0 }).withMessage("userId must be a integer and greater or equal to 0"),
+        body("propertyId")
+            .exists().withMessage("propertyId key must be in the request")
+            .isInt({ min: 0 }).withMessage("propertyId must be a integer and greater or equal to 0"),
+    ];
+}

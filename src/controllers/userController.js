@@ -31,8 +31,6 @@ export const getUserById = async (req, res) => {
 export const createUser = async (req, res) => {
     try {
         const user = await User.create(req.body);
-        console.log("asd")
-        console.log(user);
         console.log("[INFO-SV]: Success Creating User");
         res.status(201).json({
             msg: "user created successfully"
