@@ -15,12 +15,16 @@ import {
     deletePropertyRules,
     updatePropertyRules
 } from "../middlewares/validateRequest.js";
-import { checkProperty } from "../middlewares/entityExists.js";
+import {
+    checkProperty,
+    checkUser,
+    checkPropertyType
+} from "../middlewares/entityExists.js";
 
 export const propertyRoutes = Router();
 
 propertyRoutes.get("/", getPropertiesRules(), validateRequest, getProperties);
 propertyRoutes.get("/:id", getPropertyRules(), validateRequest, checkProperty, getPropertyById);
-propertyRoutes.post("/", createPropertyRules(), validateRequest, createProperty);
+propertyRoutes.post("/", createPropertyRules(), validateRequest, checkUser, checkPropertyType, createProperty);
 propertyRoutes.delete("/:id", deletePropertyRules(), validateRequest, checkProperty, deleteProperty);
 propertyRoutes.put("/:id", updatePropertyRules(), validateRequest, checkProperty, updateProperty);
