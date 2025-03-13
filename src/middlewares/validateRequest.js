@@ -8,10 +8,10 @@ import {
 
 // Check If Request Have Some Error
 export const validateRequest = (req, res, next) => {
-    const { errors } = validationResult(req);
-    if (errors.length != 0) {
+    const error = validationResult(req);
+    if (!error.isEmpty()) {
         return res.status(400).json({
-            msg: errors[0].msg
+            msg: error.errors[0].msg
         });
     }
     next();
