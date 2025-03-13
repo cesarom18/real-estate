@@ -2,7 +2,7 @@ import { ValidationError } from "sequelize";
 
 import { PropertyTransaction } from "../models/PropertyTransactionModel.js";
 
-export const getPropertyTransactionByUser = async (req, res) => {
+export const getPropTranByUser = async (req, res) => {
     try {
         const transactions = await PropertyTransaction.findAll({
             where: {
@@ -19,7 +19,7 @@ export const getPropertyTransactionByUser = async (req, res) => {
     }
 }
 
-export const createPropertyTransaction = async (req, res) => {
+export const createPropTran = async (req, res) => {
     try {
         await PropertyTransaction.create(req.body);
         console.log("[INFO-SV]: Success Creating Property Transaction");

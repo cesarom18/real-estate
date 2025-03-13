@@ -147,14 +147,14 @@ export const updatePropertyRules = () => {
     ];
 }
 
-export const getUserPropertyTransactionsRules = () => {
+export const getPropTranUserRules = () => {
     return [
         param("id")
             .isInt({ min: 0 }).withMessage("property id param must be a intenger and greater or equal to 0")
     ];
 }
 
-export const createPropertyTransactionRules = () => {
+export const createPropTranRules = () => {
     return [
         body("price")
             .exists().withMessage("price key must be in the request")
