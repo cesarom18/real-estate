@@ -1,12 +1,13 @@
 import { Router } from "express";
 
 import {
-    getPropertyTransactions,
+    getPropertyTransactionByUser,
     createPropertyTransaction
 } from "../controllers/propertyTransactionController.js";
 import {
     validateRequest,
-    createPropertyTransactionRules
+    createPropertyTransactionRules,
+    getUserPropertyTransactionsRules
 } from "../middlewares/validateRequest.js";
 import {
     checkUser,
@@ -15,5 +16,5 @@ import {
 
 export const propertyTransactionRoutes = Router();
 
-propertyTransactionRoutes.get("/", getPropertyTransactions);
+propertyTransactionRoutes.get("/:id", getUserPropertyTransactionsRules(), validateRequest, checkUser, getPropertyTransactionByUser);
 propertyTransactionRoutes.post("/", createPropertyTransactionRules(), validateRequest, checkUser, checkProperty, createPropertyTransaction);
