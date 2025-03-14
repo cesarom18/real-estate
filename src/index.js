@@ -1,5 +1,6 @@
 import express from "express";
 import rateLimiter from "express-rate-limit";
+import cookieParser from "cookie-parser";
 
 import { sequelize, connectDB } from "./config/db.js";
 import { setupAssociations } from "./models/associations.js";
@@ -29,6 +30,7 @@ app.use(rateLimiter({ // Request Limiter
     },
     keyGenerator: (req, res) => req.ip, // Identify Users For His IP
 }));
+app.use(cookieParser()); // Use Cookies Without Sign
 
 // DB Setup And Configuration
 connectDB();

@@ -2,11 +2,11 @@ import { genSalt, hash } from "bcryptjs";
 
 import { User } from "../models/UserModel.js";
 import { UserRol } from "../models/UserRolModel.js";
+import { generateJWT } from "../utils/generateJWT.js";
 
 export const signUp = async (req, res) => {
     try {
         const { name, email, password, userRolId } = req.body; // Password Is Already Checheck With validateRequest Middleware
-
         // Check If UserRol ID Exist
         const userRol = await UserRol.findByPk(userRolId);
         if (!userRol) return res.status(404).json({
@@ -21,16 +21,18 @@ export const signUp = async (req, res) => {
         if (existEmail) return res.status(400).json({
             msg: "user email is already registered in the database"
         });
-
+        // Hash Password And Create User
         const salt = await genSalt(10);
         const hashedPassword = await hash(password, salt);
-
-        await User.create({
+        const user = await User.create({
             name,
             email,
             password: hashedPassword,
             userRolId
         });
+        // Generate JWT And Set Cookies
+        generateJWT(user.id, res);
+
         console.log("[INFO-SV]: Success Signing Up User");
         res.status(200).json({
             msg: "success signing up user"
