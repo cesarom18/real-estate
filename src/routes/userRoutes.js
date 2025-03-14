@@ -13,10 +13,11 @@ import {
     deleteUserRules
 } from "../middlewares/validateRequest.js";
 import { checkUser } from "../middlewares/entityExists.js";
+import { authenticateUser } from "../middlewares/authenticateUser.js";
 
 export const userRoutes = Router();
 
-userRoutes.get("/", getUsers);
-userRoutes.get("/:id", getUserRules(), validateRequest, checkUser, getUserById);
-userRoutes.post("/", createUserRules(), validateRequest, createUser);
-userRoutes.delete("/:id", deleteUserRules(), validateRequest, checkUser, deleteUser);
+userRoutes.get("/", authenticateUser, getUsers);
+userRoutes.get("/:id", authenticateUser, getUserRules(), validateRequest, checkUser, getUserById);
+userRoutes.post("/", authenticateUser, createUserRules(), validateRequest, createUser);
+userRoutes.delete("/:id", authenticateUser, deleteUserRules(), validateRequest, checkUser, deleteUser);

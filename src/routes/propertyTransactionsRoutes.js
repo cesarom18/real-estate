@@ -13,8 +13,9 @@ import {
     checkUser,
     checkProperty
 } from "../middlewares/entityExists.js";
+import { authenticateUser } from "../middlewares/authenticateUser.js";
 
 export const propertyTransactionRoutes = Router();
 
-propertyTransactionRoutes.get("/:id", getPropTranUserRules(), validateRequest, checkUser, getPropTranByUser);
-propertyTransactionRoutes.post("/", createPropTranRules(), validateRequest, checkUser, checkProperty, createPropTran);
+propertyTransactionRoutes.get("/:id", authenticateUser, getPropTranUserRules(), validateRequest, checkUser, getPropTranByUser);
+propertyTransactionRoutes.post("/", authenticateUser, createPropTranRules(), validateRequest, checkUser, checkProperty, createPropTran);
