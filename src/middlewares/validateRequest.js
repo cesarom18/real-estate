@@ -107,7 +107,6 @@ export const deletePropertyRules = () => {
 }
 
 export const updatePropertyRules = () => {
-    console.log("entro validate update property")
     return [
         param("id")
             .isInt({ min: 0 }).withMessage("property id param must be a intenger and greater or equal to 0"),

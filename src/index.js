@@ -6,7 +6,8 @@ import { setupAssociations } from "./models/associations.js";
 import {
     userRoutes,
     propertyRoutes,
-    propertyTransactionRoutes
+    propertyTransactionRoutes,
+    authRoutes
 } from "./routes/index.js";
 
 // Create Server App With Express
@@ -40,6 +41,7 @@ setupAssociations();
 app.use("/api/user", userRoutes);
 app.use("/api/property", propertyRoutes);
 app.use("/api/property-transaction", propertyTransactionRoutes);
+app.use("/api/auth", authRoutes);;
 
 // Server Port Listener
 const port = process.env.PORT || 3000;
