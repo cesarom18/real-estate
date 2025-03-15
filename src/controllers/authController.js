@@ -68,3 +68,18 @@ export const login = async (req, res) => {
         });
     }
 }
+
+export const logout = async (req, res) => {
+    try {
+        res.cookie("jwt", "", { maxAge: 0 }) // Clear JWT
+        console.log("[INFO-SV]: Success Logging Out User");
+        res.status(200).json({
+            msg: "success logging out user"
+        });
+    } catch (error) {
+        console.log(`[INFO-SV]: Error Logging Out User\n ${error}`);
+        res.status(500).json({
+            msg: "error logging out user"
+        });
+    }
+}

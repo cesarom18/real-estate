@@ -2,7 +2,8 @@ import { Router } from "express";
 
 import {
     signUp,
-    login
+    login,
+    logout
 } from "../controllers/authController.js";
 import {
     validateRequest,
@@ -14,3 +15,4 @@ export const authRoutes = Router();
 
 authRoutes.post("/sign-up", createUserRules(), validateRequest, signUp);
 authRoutes.post("/login", loginRules(), validateRequest, login);
+authRoutes.post("/logout", logout);
