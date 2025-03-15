@@ -169,3 +169,14 @@ export const createPropTranRules = () => {
             .isInt({ min: 0 }).withMessage("propertyId must be a integer and greater or equal to 0"),
     ];
 }
+
+export const loginRules = () => {
+    return [
+        body("email")
+            .exists().withMessage("email key must be in the request")
+            .isEmail().withMessage("email must be in the correct format"),
+        body("password")
+            .exists().withMessage("password key must be in the request")
+            .isStrongPassword().withMessage("password must comply with the rules")
+    ];
+}

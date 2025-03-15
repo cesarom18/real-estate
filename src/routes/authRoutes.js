@@ -1,13 +1,16 @@
 import { Router } from "express";
 
 import {
-    signUp
+    signUp,
+    login
 } from "../controllers/authController.js";
 import {
     validateRequest,
-    createUserRules
+    createUserRules,
+    loginRules
 } from "../middlewares/validateRequest.js";
 
 export const authRoutes = Router();
 
 authRoutes.post("/sign-up", createUserRules(), validateRequest, signUp);
+authRoutes.post("/login", loginRules(), validateRequest, login);
