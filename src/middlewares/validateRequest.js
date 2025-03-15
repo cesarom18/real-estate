@@ -22,13 +22,16 @@ export const createUserRules = () => {
         body("name")
             .exists().withMessage("name key must be in the request")
             .isString().withMessage("name must be a string")
-            .isLength({ min: 6, max: 15 }).withMessage("username must be between 6 and 15 characters long"),
+            .isLength({ min: 6, max: 15 }).withMessage("username must be between 6 and 15 characters long")
+            .trim(),
         body("email")
             .exists().withMessage("email key must be in the request")
-            .isEmail().withMessage("email must be in the correct format"),
+            .isEmail().withMessage("email must be in the correct format")
+            .trim(),
         body("password")
             .exists().withMessage("password key must be in the request")
-            .isStrongPassword().withMessage("password must comply with the rules"), // Default Options At 'https://www.npmjs.com/package/validator'
+            .isStrongPassword().withMessage("password must comply with the rules") // Default Options At 'https://www.npmjs.com/package/validator'
+            .trim(),
         body("userRolId")
             .exists().withMessage("userRolId key must be in the request")
             .isNumeric().withMessage("userRolId must be a number")
@@ -54,18 +57,21 @@ export const createPropertyRules = () => {
         body("title")
             .exists().withMessage("title key must be in the request")
             .isString().withMessage("title must be a string")
-            .isLength({ min: 5, max: 25 }).withMessage("title must be between 6 and 15 characters long"),
+            .isLength({ min: 5, max: 25 }).withMessage("title must be between 6 and 15 characters long")
+            .trim(),
         body("description")
             .exists().withMessage("descripton key must be in the request")
             .isString().withMessage("descripton must be a string")
-            .isLength({ min: 10, max: 100 }).withMessage("title must be between 10 and 100 characters long"),
+            .isLength({ min: 10, max: 100 }).withMessage("title must be between 10 and 100 characters long")
+            .trim(),
         body("price")
             .exists().withMessage("price key must be in the request")
             .isInt({ min: 100 }).withMessage("price must be a number and greater than 100"),
         body("location")
             .exists().withMessage("location key must be in the request")
             .isString().withMessage("location must be a string")
-            .isLength({ min: 10 }).withMessage("location must be greater than 10 characters"),
+            .isLength({ min: 10 }).withMessage("location must be greater than 10 characters")
+            .trim(),
         body("numRooms")
             .exists().withMessage("numRooms key must be in the request")
             .isInt({ min: 1 }).withMessage("numRooms must be a integer and greater than 1"),
@@ -119,18 +125,21 @@ export const updatePropertyRules = () => {
         body("title")
             .optional({ nullable: true })
             .isString().withMessage("title must be a string")
-            .isLength({ min: 5, max: 25 }).withMessage("title must be between 6 and 15 characters long"),
+            .isLength({ min: 5, max: 25 }).withMessage("title must be between 6 and 15 characters long")
+            .trim(),
         body("description")
             .optional({ nullable: true })
             .isString().withMessage("descripton must be a string")
-            .isLength({ min: 10, max: 100 }).withMessage("title must be between 10 and 100 characters long"),
+            .isLength({ min: 10, max: 100 }).withMessage("title must be between 10 and 100 characters long")
+            .trim(),
         body("price")
             .optional({ nullable: true })
             .isInt({ min: 100 }).withMessage("price must be a number and greater than 100"),
         body("location")
             .optional({ nullable: true })
             .isString().withMessage("location must be a string")
-            .isLength({ min: 10 }).withMessage("location must be greater than 10 characters"),
+            .isLength({ min: 10 }).withMessage("location must be greater than 10 characters")
+            .trim(),
         body("numRooms")
             .optional({ nullable: true })
             .isInt({ min: 1 }).withMessage("numRooms must be a integer and greater than 1"),
@@ -160,7 +169,8 @@ export const createPropTranRules = () => {
             .isInt({ min: 100 }).withMessage("price must be a number and greater than 100"),
         body("paymentMethod")
             .exists().withMessage("paymentMethod key must be in the request")
-            .isIn(["Credit Card", "Debit Card", "Bank Transfer"]).withMessage("paymentMethod must be one of these values 'Credit Card', 'Debit Card', 'Bank Transfer'"),
+            .isIn(["Credit Card", "Debit Card", "Bank Transfer"]).withMessage("paymentMethod must be one of these values 'Credit Card', 'Debit Card', 'Bank Transfer'")
+            .trim(),
         body("userId")
             .exists().withMessage("userId key must be in the request")
             .isInt({ min: 0 }).withMessage("userId must be a integer and greater or equal to 0"),
@@ -174,9 +184,11 @@ export const loginRules = () => {
     return [
         body("email")
             .exists().withMessage("email key must be in the request")
-            .isEmail().withMessage("email must be in the correct format"),
+            .isEmail().withMessage("email must be in the correct format")
+            .trim(),
         body("password")
             .exists().withMessage("password key must be in the request")
             .isStrongPassword().withMessage("password must comply with the rules")
+            .trim()
     ];
 }
