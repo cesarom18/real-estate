@@ -8,3 +8,4 @@
 - JSONWebToken
 - CookiesParser
 - ExpressRateLimit
+- Puppeteer (WebScrapping)
