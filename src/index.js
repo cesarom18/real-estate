@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 
 import { sequelize, connectDB } from "./config/db.js";
 import { setupAssociations } from "./models/associations.js";
+import { scrapJob } from "./utils/scrapWeb.js";
 import {
     userRoutes,
     propertyRoutes,
@@ -38,6 +39,9 @@ sequelize.sync({ force: false, alter: false })
     .then(() => console.log("[INFO-DB]: Synchronized DB and tables"))
     .catch((error) => console.log(`[INFO-DB]: Error Synchronizing DB And Tables\n ${error}`));
 setupAssociations();
+
+// Scrap Web Job
+scrapJob.start(); // Every 5 Seconds
 
 // Setup Routes
 app.use("/api/user", userRoutes);

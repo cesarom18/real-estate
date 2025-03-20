@@ -1,4 +1,5 @@
 import { ValidationError } from "sequelize";
+import puppeteer from "puppeteer";
 
 import { Property } from "../models/PropertyModel.js";
 
